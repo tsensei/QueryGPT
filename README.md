@@ -5,11 +5,8 @@
 ### This project is inspired by 'knowledge base' from [trainmy.ai](https://trainmy.ai/).
 
 <br/>
-<br/>
 
 ## Introduction
-
-<hr/>
 
 With all the excellent capabilites of OpenAI GPT models, I have always wanted to build a Chatbot that learns from a knowledge base I provide, and answers to my queries based on the knowledge base and its own training data. It would serve as perfect assistant for Tech Documentations, Scientific Papers, Business Product Data.
 
@@ -17,15 +14,11 @@ After going through large documentations, code examples I have found this projec
 
 ## Prerequisites
 
-<hr/>
-
 This project doesn't require any python knowlege (most of the code examples on OpenAI docs are in python) and also no need to convert your text files to JSON/JSONL, this works fine with text files.
 
 You need to have knowledge about NodeJS, basic Javascript and OpenAI services.
 
 ## Let's Code
-
-<hr/>
 
 We start by making a NodeJS project and installing all the necessary dependencies
 
@@ -73,8 +66,6 @@ module.exports = { openai };
 
 ## Embedding our data
 
-<hr/>
-
 For this example, I will be using the wikipedia page on my University - [University of Dhaka](https://en.wikipedia.org/wiki/University_of_Dhaka) as my data. When asked ChatGPT, It can't answer correctly or it will make things up for intricate details.
 
 There are some steps I followed to format my data which makes the results more accurate due to the approach we are using. The data needs to be split in small paragraphs, this helps with the embedding process. I saved my data in `./embeddedData/sourceData.txt`
@@ -101,8 +92,6 @@ To learn more on this topic : [Blinkdata Embedding Tutorial](https://blinkdata.c
 <br/>
 
 ## Generating perfect response using embedding data and completion models
-
-<hr/>
 
 This is the most tricky yet 'woah' part.
 
