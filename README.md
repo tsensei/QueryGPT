@@ -4,19 +4,17 @@
 
 ### This project is inspired by 'knowledge base' from [trainmy.ai](https://trainmy.ai/).
 
-<br/>
-
 ## Introduction
 
-With all the excellent capabilites of OpenAI GPT models, I have always wanted to build a Chatbot that learns from a knowledge base I provide, and answers to my queries based on the knowledge base and its own training data. It would serve as perfect assistant for Tech Documentations, Scientific Papers, Business Product Data.
+With all the excellent capabilities of OpenAI GPT models, I have always wanted to build a Chatbot that learns from a knowledge base I provide, and answers my queries based on the knowledge base and its training data. It would serve as the perfect assistant for Tech Documentation, Scientific Papers, and Business Product Data.
 
 After going through large documentations, code examples I have found this project by [@gidgreen](https://github.com/gidgreen/) that allowed me to build this project. In this documentation I will try to explain all the steps and requirements to build this chatbot.
 
 ## Prerequisites
 
-This project doesn't require any python knowlege (most of the code examples on OpenAI docs are in python) and also no need to convert your text files to JSON/JSONL, this works fine with text files.
+This project doesn't require any python knowledge (most of the code examples on OpenAI docs are in python but I write JS) and also no need to convert your text files to JSON/JSONL, this works fine with text files.
 
-You need to have knowledge about NodeJS, basic Javascript and OpenAI services.
+You need to know about NodeJS, basic Javascript, and OpenAI services.
 
 ## Let's Code
 
@@ -74,7 +72,7 @@ I made a new file `embedding.js`
 
 _The embedding.js file is necessarily large so I will be explaining the code using comments there. Please refer to that file_
 
-When executed the file with `node embedding.js`, the following gets printed in the console on successful embedding.
+When executing the file with `node embedding.js`, the following gets printed in the console on successful embedding.
 
 <pre>
 Embedding Started ⌛
@@ -95,11 +93,11 @@ To learn more on this topic : [Blinkdata Embedding Tutorial](https://blinkdata.c
 
 ### _This is the most tricky yet 'woah' part._
 
-We won't fine tune the model which requires feeding it Questions and Answers. The approach we will take, is we embed the Question also using the same embedding model.
+We won't fine-tune the model which requires feeding it Questions and Answers. The approach we will take is also to embed the Question using the same embedding model.
 
 The magic happens when we dot product _(some math shit right!)_ the embedding vectors of two paragraphs - we get a scalar value that represents the similarity between the two paragraphs in terms of their semantic meaning and context.
 
-So, we loop through each paragraph from our context and multiply its embedding vector with the one from question. The paragraphs with more similarity gets the higher score. Then we pull 3-5 of these paragraphs, send over to completion model, like the highly capable 'text-davinci-003' along with the questions and with some prompt engineering, we get the correct response.
+So, we loop through each paragraph from our context and dot product its embedding vector with the one from the question. The paragraphs with more similarity get a higher score. Then we pull 3-5 of these paragraphs and send them over to the completion model, like the highly capable 'text-davinci-003' along with the questions, and with some prompt engineering, we get the correct response.
 
 You can use any of the two prompts.
 
@@ -138,7 +136,7 @@ generateCompletion("Who is acting dean of the Faculty of Business Studies");
 In our console :
 
 ```
-tsensei@mintdesktop ~/D/QueryGPT (main)> node completion.js
+tsensei@desktop ~/D/QueryGPT (main)> node completion.js
 
 Called completion function with prompt : Who is acting dean of the Faculty of Business Studies
 
@@ -146,5 +144,3 @@ Muhammad Abdul Moyeen is the acting dean of the Faculty of Business Studies.
 ```
 
 Hurrah! We have successfully created a AI assistant that answers out queries based on our provided personalized and updated data!!
-
-## Wait! There's a surprise
