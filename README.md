@@ -93,10 +93,58 @@ To learn more on this topic : [Blinkdata Embedding Tutorial](https://blinkdata.c
 
 ## Generating perfect response using embedding data and completion models
 
-This is the most tricky yet 'woah' part.
+### _This is the most tricky yet 'woah' part._
 
 We won't fine tune the model which requires feeding it Questions and Answers. The approach we will take, is we embed the Question also using the same embedding model.
 
 The magic happens when we dot product _(some math shit right!)_ the embedding vectors of two paragraphs - we get a scalar value that represents the similarity between the two paragraphs in terms of their semantic meaning and context.
 
-So we loop through each paragraph from out context and multiply its embedding vector with the one from question. The paragraphs with more similarity gets the higher score. Then we pull 3-5 of these paragraphs, send over to completion model, like the highly capable 'text-davinci-003' along with the questions and with some prompt engineering, we get the correct response.
+So, we loop through each paragraph from our context and multiply its embedding vector with the one from question. The paragraphs with more similarity gets the higher score. Then we pull 3-5 of these paragraphs, send over to completion model, like the highly capable 'text-davinci-003' along with the questions and with some prompt engineering, we get the correct response.
+
+You can use any of the two prompts.
+
+**If you want it to answer with own knowledge if answer isn't present in provided data** :
+
+```js
+"Answer the following question, also use your own knowledge when necessary :\n\n" +
+  "Context :\n" +
+  paragraph.join("\n\n") +
+  "\n\nQuestion :\n" +
+  question +
+  "?" +
+  "\n\nAnswer :";
+```
+
+**If you want it to only use provided data as knowledge base and not its own** :
+
+```js
+"Answer the following question from the context, if the answer can not be deduced from the context, say 'I dont know' :\n\n" +
+  "Context :\n" +
+  paragraph.join("\n\n") +
+  "\n\nQuestion :\n" +
+  question +
+  "?" +
+  "\n\nAnswer :";
+```
+
+_The code is provided in `completion.js` along with explanation in comments_
+
+When we run `completion.js` with
+
+```js
+generateCompletion("Who is acting dean of the Faculty of Business Studies");
+```
+
+In our console :
+
+```
+tsensei@mintdesktop ~/D/QueryGPT (main)> node completion.js
+
+Called completion function with prompt : Who is acting dean of the Faculty of Business Studies
+
+Muhammad Abdul Moyeen is the acting dean of the Faculty of Business Studies.
+```
+
+Hurrah! We have successfully created a AI assistant that answers out queries based on our provided personalized and updated data!!
+
+## Wait! There's a surprise
